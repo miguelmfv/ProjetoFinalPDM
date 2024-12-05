@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema principal da aplicação -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Personalizações opcionais -->
+        <item name="colorPrimary">#0277BD</item>
+        <item name="colorPrimaryDark">#283593</item>
+        <item name="colorAccent">#B2DFDB</item>
+    </style>
+</resources>

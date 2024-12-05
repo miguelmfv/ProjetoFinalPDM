@@ -11,20 +11,20 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Projetos"
+        android:text="Tarefas"
         android:textAlignment="center"
         android:textSize="34sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProjects"
+        android:id="@+id/recyclerViewTasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:listitem="@layout/project_list"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        tools:listitem="@layout/task_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addProject"
+        android:id="@+id/addTask"
         android:layout_width="wrap_content"
         android:layout_height="31dp"
         android:layout_gravity="end|bottom"
@@ -47,7 +47,6 @@
             android:text="Projetos" />
 
     </LinearLayout>
-
 
 </LinearLayout>
 

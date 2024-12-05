@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="8dp"
+    android:divider="?android:attr/dividerVertical"
+    android:showDividers="middle">
+
+    <!-- Checkbox for task completion -->
+    <CheckBox
+        android:id="@+id/checkTaskCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/checkbox_selector"
+        android:layout_marginEnd="8dp"
+        android:theme="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+        android:contentDescription="Marcar como concluída" />
+
+    <!-- Task Title -->
+    <TextView
+        android:id="@+id/fieldTaskTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Título da Tarefa"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+
+
+    <!-- Priority Number -->
+    <TextView
+        android:id="@+id/fieldPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="end"
+        android:padding="8dp"
+        android:text="3"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

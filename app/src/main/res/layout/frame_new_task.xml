@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/fieldTaskName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Tarefa"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Selecionador de prioridade -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecione a Prioridade"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/prioritySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:background="@android:color/white"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecione o Projeto"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/projectSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:background="@android:color/white"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+
+</FrameLayout>
