@@ -12,6 +12,10 @@ class ProjectsSpinnerAdapter(
     private val projects: List<Project>
 ) : ArrayAdapter<Project>(context, android.R.layout.simple_spinner_item, projects) {
 
+    init {
+        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getView(position, convertView, parent) as TextView
         view.text = projects[position].name

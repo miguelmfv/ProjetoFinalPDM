@@ -8,7 +8,7 @@ import android.widget.TextView
 
 class PrioritySpinnerAdapter(
     context: Context,
-    private val priorities: List<String>,
+    priorities: List<String>,
     private val colors: List<Int>
 ) : ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, priorities) {
 

@@ -3,7 +3,6 @@ package com.example.projetofinalpdm.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.sql.Date
 
 @Entity(
     tableName = "task",

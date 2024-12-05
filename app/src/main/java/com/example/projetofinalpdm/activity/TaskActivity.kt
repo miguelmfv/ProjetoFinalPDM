@@ -1,8 +1,6 @@
 package com.example.projetofinalpdm.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,17 +8,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.projetofinalpdm.adapter.PrioritySpinnerAdapter
-import com.example.projetofinalpdm.adapter.ProjectAdapter
 import com.example.projetofinalpdm.adapter.ProjectsSpinnerAdapter
 import com.example.projetofinalpdm.adapter.TaskAdapter
 import com.example.projetofinalpdm.dao.TaskDAO
 import com.example.projetofinalpdm.database.AppDatabase
 import com.example.projetofinalpdm.databinding.ActivityTasksBinding
 import com.example.projetofinalpdm.databinding.FrameNewTaskBinding
+import com.example.projetofinalpdm.model.Project
 import com.example.projetofinalpdm.model.Task
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
-import kotlin.properties.Delegates
 
 class TaskActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTasksBinding
@@ -59,6 +56,7 @@ class TaskActivity : AppCompatActivity() {
         binding.addTask.setOnClickListener {
             showAddTask()
         }
+        reloadTaskList(db)
     }
 
     private fun finishTask(task: Task) {
@@ -82,7 +80,9 @@ class TaskActivity : AppCompatActivity() {
         lifecycleScope.launch {
 
             val taskList = db.taskDAO().getTasksByProject(projectId)
-            adapter.submitList(taskList)
+
+            val filteredList = taskList.filter{ !it.status }
+            adapter.submitList(filteredList)
         }
     }
 
@@ -93,14 +93,12 @@ class TaskActivity : AppCompatActivity() {
         val priorities = listOf("P1 - Urgente", "P2 - Alta", "P3 - Média", "P4 - Baixa")
         val colors = listOf(
             android.graphics.Color.RED,
-            android.graphics.Color.CYAN,
-            android.graphics.Color.YELLOW,
-            android.graphics.Color.GREEN
+            android.graphics.Color.BLACK,
+            android.graphics.Color.BLACK,
+            android.graphics.Color.BLACK
         )
 
-        val priorityAdapter = PrioritySpinnerAdapter(this@TaskActivity, priorities, colors)
 
-        dialogBinding.prioritySpinner.adapter = priorityAdapter
 
         lifecycleScope.launch {
             try {
@@ -110,9 +108,13 @@ class TaskActivity : AppCompatActivity() {
                 ).build()
 
                 val projects = db.projectDAO().getAllProjects()
+
                 val projectAdapter = ProjectsSpinnerAdapter(this@TaskActivity, projects)
+                val priorityAdapter = PrioritySpinnerAdapter(this@TaskActivity, priorities, colors)
 
                 dialogBinding.projectSpinner.adapter = projectAdapter
+                dialogBinding.prioritySpinner.adapter = priorityAdapter
+
             } catch (e: Exception) {
                 Snackbar.make(dialogBinding.root, "Erro ao carregar projetos: ${e.message}", Snackbar.LENGTH_LONG).show()
             }
@@ -124,7 +126,8 @@ class TaskActivity : AppCompatActivity() {
             .setPositiveButton("Adicionar Tarefa") { _, _ ->
                 val name = dialogBinding.fieldTaskName.text.toString().trim()
                 val selectedPriority = dialogBinding.prioritySpinner.selectedItemPosition + 1
-                val selectedProject = dialogBinding.projectSpinner.selectedItemPosition
+                val selectedProject = dialogBinding.projectSpinner.selectedItem as Project
+
 
                 if (name.isEmpty()) {
                     Snackbar.make(dialogBinding.root, "O nome não pode estar vazio", Snackbar.LENGTH_SHORT).show()
@@ -134,7 +137,7 @@ class TaskActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     try {
                         newTask = Task(
-                            projectId = selectedProject,
+                            projectId = selectedProject.id,
                             title = name,
                             priority = selectedPriority,
                             status = false
